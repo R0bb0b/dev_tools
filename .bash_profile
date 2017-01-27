@@ -1,6 +1,6 @@
 # User specific aliases and functions
 # just show base working dir & color the prompt
-PS1="\[\033[0;31m\][INFOSPHERE:\w]$  \[\033[0;37m\]"
+PS1="\[\033[0;31m\][SERVERNAME:\w]$  \[\033[0;37m\]"
 
 PATH=$PATH:$HOME/bin:/usr/local/nz/bin:/usr/local/nz/bin64
 PATH=$PATH:/opt/bin
