@@ -2,10 +2,7 @@
 # just show base working dir & color the prompt
 PS1="\[\033[0;31m\][SERVERNAME:\w]$  \[\033[0;37m\]"
 
-PATH=$PATH:$HOME/bin:/usr/local/nz/bin:/usr/local/nz/bin64
-PATH=$PATH:/opt/bin
-PATH=$PATH:/opt/scala-2.10.6/bin
-
+#add paths here
 
 export PATH
 
@@ -16,8 +13,6 @@ alias svim='sudo vim -p -S /home/rob/.vimrc'
 alias svimdiff='sudo vimdiff -S /home/rob/.vimrc'
 alias vimh='vim -o '
 alias vimv='vim -O '
-alias rmswp='sudo rm `find ./ -type f -name "*.swp"`'
-alias rmpyc='sudo rm `find ./ -type f -name "*.pyc"`'
 alias vimswp='vim `for line in $(find ./ -type f -name "*.swp"); do newline=${line/\/./\/}; echo ${newline/.swp/}; done`'
 
 #ls colors
