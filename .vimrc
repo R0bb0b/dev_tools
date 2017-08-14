@@ -29,6 +29,7 @@ map <C-l> gu
 map <ENTER> <C-f>
 map \ <C-b>
 map <End> $
+map ; $i<Right>;<Esc>
 map <C-d> o<ESC>i/**<CR> * Enter Description<CR>*<CR>* Param List<CR>* @param string $paramName1<CR>* @param string $paramName1<CR>*<CR>*<CR>* @return <CR>*/<ESC>>10<up><down><down>eebvee
 map <C-o> i<right><CR>if () {<CR><CR>}<ESC><up><up>i<CR><CR><right><right><right><right>
 map <C-h> i<!DOCTYPE HTML><CR><html><CR><head><CR><title></title><CR></head><CR><body><CR><CR></body><CR></html><ESC>bbbbbbi<TAB>

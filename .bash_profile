@@ -1,6 +1,6 @@
 # User specific aliases and functions
 # just show base working dir & color the prompt
-PS1="\[\033[0;31m\][SERVERNAME:\w]$  \[\033[0;37m\]"
+PS1="\[\033[0;32m\][LocalDev:\w]$  \[\033[0;37m\]"
 
 #add paths here
 
@@ -14,6 +14,7 @@ alias svimdiff='sudo vimdiff -S /home/rob/.vimrc'
 alias vimh='vim -o '
 alias vimv='vim -O '
 alias vimswp='vim `for line in $(find ./ -type f -name "*.swp"); do newline=${line/\/./\/}; echo ${newline/.swp/}; done`'
+alias restart_wifi='sudo service network-manager restart'
 
 #ls colors
 alias ls='ls --color'
@@ -72,3 +73,4 @@ function afind_fd() {
 		let i++
 	done
 }
+
