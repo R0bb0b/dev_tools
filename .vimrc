@@ -30,23 +30,13 @@ map <ENTER> <C-f>
 map \ <C-b>
 map <End> $
 map ; $i<Right>;<Esc>
-map <C-d> o<ESC>i/**<CR> * Enter Description<CR>*<CR>* Param List<CR>* @param string $paramName1<CR>* @param string $paramName1<CR>*<CR>*<CR>* @return <CR>*/<ESC>>10<up><down><down>eebvee
-map <C-o> i<right><CR>if () {<CR><CR>}<ESC><up><up>i<CR><CR><right><right><right><right>
-map <C-h> i<!DOCTYPE HTML><CR><html><CR><head><CR><title></title><CR></head><CR><body><CR><CR></body><CR></html><ESC>bbbbbbi<TAB>
-command Svndiff VCSVimDiff
-
-map class i<?php<CR>/**<CR> * $Id: $<CR>*<CR>* [Description]<CR>*<CR>* @author [DevName] <[DevName]@imm.com><CR>**/<CR><CR><BACKSPACE>class iconHandler<CR>{<CR><CR>	function __construct()<CR>{<CR><CR>}<CR><CR><BACKSPACE>}<CR>?><up><up><up><up><up><up><up><up><up><ESC>eebve
+map <C-t> :TComment<Enter>
+map l $
 
 highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=black
 highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
 highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
 highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=white
-
-let @n = 'i/** * Enter Method Name** Enter Description** Param List* @param string $paramName1vbbbb€ku€kr€kr€kr€kr€kr€kr€kr€kr€kry€kdeeep€kdvdi€kr2o*** @return*/v€ku€ku€ku€ku€ku€ku€ku€ku€ku€ku€ku>€kd€kr€kr€krveee'
-let @f = 'i€kr() {}€ku€kuA€kl€kl'
-map ff @f
-map hh @q
-map Y @a
 
 function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
@@ -70,6 +60,23 @@ tabdo set scrolloff=8
 tabdo set incsearch
 tabdo set synmaxcol=2048
 
+"easy motion start
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap c <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  w <Plug>(easymotion-bd-w)
+nmap w <Plug>(easymotion-overwin-w)
+"easy motion end
+
 if &diff
     " diff mode
     tabdo set diffopt+=iwhite
@@ -79,3 +86,14 @@ endif
 "    :%s/\/var\/www\//\/home\/rob\/sandbox\//g
 "    :%s/.com/.rob.devserver/g
 "endfunction
+
+" specify plugin directory
+call plug#begin('~/.vim/plugged')
+
+Plug 'tomtom/tcomment_vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'Raimondi/delimitMate'
+
+" Initialize plugin system
+call plug#end()
