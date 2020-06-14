@@ -1,24 +1,34 @@
 # User specific aliases and functions
 # just show base working dir & color the prompt
-PS1="\[\033[0;32m\][LocalDev:\w]$  \[\033[0;37m\]"
-
-#add paths here
-
-export PATH
+PS1="\[\033[0;32m\][LOCAL: \w]$  \[\033[0;37m\]"
 
 # Misc settings
-umask 002                                       # Default file perm
+umask 022                                       # Default file perm
 alias vim='vim -p '
-alias svim='sudo vim -p -S /home/rob/.vimrc'
-alias svimdiff='sudo vimdiff -S /home/rob/.vimrc'
-alias vimh='vim -o '
-alias vimv='vim -O '
-alias vimswp='vim `for line in $(find ./ -type f -name "*.swp"); do newline=${line/\/./\/}; echo ${newline/.swp/}; done`'
-alias restart_wifi='sudo service network-manager restart'
+alias box='cd ~/sandbox'
+alias proj='cd ~/sandbox/projects'
+alias vimstart='vim -c ":mks! ~/vimsession.vim" '
+alias vimrestore='vim -S ~/vimsession.vim'
+alias rmswp='rm -i `find . -type f -name ".*.sw*"`'
+alias git_merge_dryrun='git merge --no-commit --no-ff'
+alias redshift='psql -h rbaldy-dev-cluster.cq2y9exg8ybh.us-east-2.redshift.amazonaws.com -U rbaldy -d devdb -p 5439'
+
+#redis
+alias redis-start='/etc/init.d/redis-server start'
+alias redis-stop='/etc/init.d/redis-server stop'
+alias redis-restart='/etc/init.d/redis-server restart'
+
+#set bash history size
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+#log aliases
+alias tailtitan='sudo tail -f /var/log/apache2/titan_backend-error.log'
+alias tailbp='sudo tail -f /var/log/apache2/portal_backend-error.log'
 
 #ls colors
 alias ls='ls --color'
-LS_COLORS='di=34:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=5:mi=0:ex=35:*.rpm=90'
+LS_COLORS='di=36:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=5:mi=0:ex=35:*.rpm=90'
 export LS_COLORS
 
 # Define some colors:
@@ -73,4 +83,3 @@ function afind_fd() {
 		let i++
 	done
 }
-

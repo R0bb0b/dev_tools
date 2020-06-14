@@ -6,9 +6,10 @@ tabdo set ignorecase
 tabdo set smartcase
 tabdo set incsearch
 tabdo set tabpagemax=100
-
+tabdo set hlsearch
 tabdo set autoindent
 tabdo set tabstop=4
+tabdo set softtabstop=4
 tabdo set shiftwidth=4
 tabdo set expandtab
 
@@ -32,11 +33,9 @@ map <End> $
 map ; $i<Right>;<Esc>
 map <C-t> :TComment<Enter>
 map l $
-
-highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=black
-highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
-highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
-highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=white
+map <C-d> o<ESC>i/**<CR> * Enter Description<CR>*<CR>* Param List<CR>* @param string $paramName1<CR>* @param string $paramName1<CR>*<CR>*<CR>* @return <CR>*/<ESC>>10<up><down><down>eebvee
+command Syntaxsync call SyntaxSync()
+command Psr2 call PhpCsFixerFixFile()
 
 function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
@@ -60,23 +59,6 @@ tabdo set scrolloff=8
 tabdo set incsearch
 tabdo set synmaxcol=2048
 
-"easy motion start
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap c <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  w <Plug>(easymotion-bd-w)
-nmap w <Plug>(easymotion-overwin-w)
-"easy motion end
-
 if &diff
     " diff mode
     tabdo set diffopt+=iwhite
@@ -87,13 +69,32 @@ endif
 "    :%s/.com/.rob.devserver/g
 "endfunction
 
-" specify plugin directory
-call plug#begin('~/.vim/plugged')
+set formatoptions-=r
 
-Plug 'tomtom/tcomment_vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
-Plug 'Raimondi/delimitMate'
+colorscheme default
 
-" Initialize plugin system
-call plug#end()
+highlight DiffAdd cterm=none ctermfg=green ctermbg=black
+highlight DiffDelete cterm=none ctermfg=darkred ctermbg=black
+highlight DiffChange cterm=none ctermfg=none ctermbg=black
+highlight DiffText cterm=none ctermfg=black ctermbg=darkyellow
+
+hi Comment ctermfg=23
+
+autocmd BufRead,BufNewFile *.ts set filetype=javascript
+
+"psr2 (php-cs-fixer) fixer start
+if !&diff
+    autocmd BufWritePost *.php silent! call RunAfterSaveProcess()
+    autocmd BufWritePost *.php nested :edit 
+endif
+
+let g:php_cs_fixer_config_file = '/home/rbaldessari/.vim/.php_cs.dist'
+
+function RunAfterSaveProcess()
+    call PhpCsFixerFixFile()
+endfunction
+"psr2 (php-cs-fixer) fixter end
+
+function SyntaxSync()
+    syntax sync fromstart
+endfunction
